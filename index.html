@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot Agent · Cosmic Sanctuary & Archetypal AI Divination</title>
+    <meta name="description" content="Online holographic Tarot divination system with realtime 3D Helix Nebula. Integrating Jungian archetypal psychology and AI spiritual mentorship, featuring 4 classic celestial spreads and conversational follow-up inquiries.">
+    <meta name="theme-color" content="#030306">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Ccircle cx='24' cy='24' r='22' stroke='%23cdbb96' stroke-width='1.2' stroke-dasharray='2 3' opacity='0.4'/%3E%3Ccircle cx='24' cy='24' r='17' stroke='%23cdbb96' stroke-width='1.2' opacity='0.8'/%3E%3Cpath d='M24 7 A17 17 0 0 0 24 41 A13 13 0 0 1 24 7 Z' fill='%23cdbb96' fill-opacity='0.25' stroke='%23cdbb96' stroke-width='0.8'/%3E%3Cpath d='M24 6 L26.5 21.5 L42 24 L26.5 26.5 L24 42 L21.5 26.5 L6 24 L21.5 21.5 Z' fill='%23ece3d2' stroke='%23826e47' stroke-width='0.6'/%3E%3Ccircle cx='24' cy='24' r='2.2' fill='%23ffffff'/%3E%3C/svg%3E">
+    
+    <!-- Open Source Fonts via Google Fonts / Fontsource -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css?v=20261017_tarot_agent_v1">
+</head>
+<body>
+    <!-- Real-time 3D Celestial Astrolabe Canvas -->
+    <canvas id="celestial-canvas" class="celestial-canvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <nav id="main-nav" class="main-nav">
+        <div class="nav-container">
+            <a href="#" class="nav-brand" data-page="landing">
+                <span class="brand-mark-wrapper">
+                    <svg class="brand-logo-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.35"/>
+                        <circle cx="24" cy="24" r="16.5" stroke="currentColor" stroke-width="1.2" opacity="0.75"/>
+                        <line x1="24" y1="2" x2="24" y2="46" stroke="currentColor" stroke-width="0.75" stroke-opacity="0.2"/>
+                        <line x1="2" y1="24" x2="46" y2="24" stroke="currentColor" stroke-width="0.75" stroke-opacity="0.2"/>
+                        <path d="M 24 7.5 A 16.5 16.5 0 0 0 24 40.5 A 12.5 12.5 0 0 1 24 7.5 Z" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
+                        <path d="M 24 6 L 26.5 21.5 L 42 24 L 26.5 26.5 L 24 42 L 21.5 26.5 L 6 24 L 21.5 21.5 Z" fill="url(#brandGoldGrad)" stroke="#faeed7" stroke-width="0.6"/>
+                        <circle cx="24" cy="24" r="2.2" fill="#ffffff"/>
+                        <defs>
+                            <linearGradient id="brandGoldGrad" x1="6" y1="6" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#fff5e3"/>
+                                <stop offset="0.45" stop-color="#d4c2a0"/>
+                                <stop offset="1" stop-color="#8f7a56"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                <div class="brand-text-group">
+                    <span class="brand-name-cn">TAROT AGENT</span>
+                    <span class="brand-name-en">COSMIC SANCTUARY</span>
+                </div>
+            </a>
+
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#" class="nav-link active" data-page="landing">
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-link" data-page="meanings">
+                    <span>Deck Archive</span>
+                </a>
+                <a href="#" class="nav-link" data-page="about">
+                    <span>About</span>
+                </a>
+                <button type="button" id="open-settings-nav-btn" class="nav-btn-settings">
+                    <span class="nav-btn-indicator" id="nav-ai-indicator"></span>
+                    <span>AI Config</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="app">
+        <!-- Landing Page -->
+        <section id="landing-page" class="page active">
+            <div class="editorial-hero">
+                <!-- Dedicated Aperture for 3D Helix Nebula on Mobile -->
+                <div class="mobile-nebula-stage">
+                    <div class="interactive-hint-pill">
+                        <span class="hint-dot"></span>
+                        <span class="hint-text">Drag 360° to wander galaxy · Orbit nebula</span>
+                    </div>
+                </div>
+
+                <div class="hero-editorial-left">
+                    <div class="editorial-metadata">
+                        <span class="meta-badge">
+                            <span class="meta-dot"></span>
+                            <span>CELESTIAL ARCHIVE · VOL. I</span>
+                        </span>
+                        <span class="meta-badge meta-coords">LAT 31°14'N · LONG 121°29'E</span>
+                    </div>
+
+                    <h1 class="editorial-title">
+                        <span class="title-eyebrow">CONTEMPORARY OCCULT & COSMIC SANCTUARY</span>
+                        <span class="title-main">TAROT AGENT</span>
+                        <span class="title-sub">Helix Nebula · Holographic Archetypal Divination</span>
+                    </h1>
+
+                    <blockquote class="editorial-manifesto">
+                        <p>“As above, so below. The revolving deep-space helix nebula and seventy-eight sacred keys mirror the revelations already inscribed in the depths of consciousness.”</p>
+                    </blockquote>
+
+                    <div class="hero-actions-row">
+                        <button id="start-btn" class="btn btn-primary btn-editorial-start">
+                            <span class="btn-sigil">✦</span>
+                            <span class="btn-text">INITIATE READING</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                        <button id="explore-meanings-btn" class="btn btn-secondary btn-editorial-explore">
+                            <span>Explore 78 Cards</span>
+                        </button>
+                    </div>
+
+                    <div class="editorial-telemetry">
+                        <div class="telemetry-item">
+                            <span class="tel-label">OBLIQUITY</span>
+                            <span class="tel-value">23° 26' 14"</span>
+                        </div>
+                        <div class="telemetry-item">
+                            <span class="tel-label">NEBULA PULSE</span>
+                            <span class="tel-value">SYNCHRONIZED</span>
+                        </div>
+                        <div class="telemetry-item">
+                            <span class="tel-label">SPACE</span>
+                            <span class="tel-value">REALTIME 3D</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-editorial-right">
+                    <div class="astrolabe-viewport-indicator">
+                        <div class="interactive-hint-pill">
+                            <span class="hint-dot"></span>
+                            <span class="hint-text">Drag 360° to wander galaxy · Orbit 3D nebula</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Luxury Editorial Pillars -->
+            <div class="editorial-pillars">
+                <div class="pillar-card">
+                    <div class="pillar-numeral">Ⅰ</div>
+                    <div class="pillar-header">
+                        <h3>Four Celestial Spreads</h3>
+                        <span class="pillar-en">CELESTIAL SPREADS</span>
+                    </div>
+                    <p>Single Card oracle, Time Stream nexus of past-present-future, Romantic Affinity, and the ten-card Celtic Cross holographic matrix.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-numeral">Ⅱ</div>
+                    <div class="pillar-header">
+                        <h3>Polar Duality</h3>
+                        <span class="pillar-en">POLAR DUALITY</span>
+                    </div>
+                    <p>Seventy-eight sacred archetypes, meticulously articulating upright light revelations and reversed shadow guidance across love, vocation, and prosperity.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-numeral">Ⅲ</div>
+                    <div class="pillar-header">
+                        <h3>Archetypal AI Mentor</h3>
+                        <span class="pillar-en">ARCHETYPE AGENT</span>
+                    </div>
+                    <p>Harmonizing Jungian analytical psychology with cutting-edge LLMs for multi-thousand-word deep consultations and real-time streaming follow-up dialogues.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-numeral">Ⅳ</div>
+                    <div class="pillar-header">
+                        <h3>Chrono-Astrology</h3>
+                        <span class="pillar-en">CHRONO-ASTROLOGY</span>
+                    </div>
+                    <p>Pure mathematical 3D procedural modeling of the deep-space helix nebula, dynamically tilting with your cursor and rippling with gravitational waves.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spread Selection Page -->
+        <section id="spread-page" class="page">
+            <div class="page-header">
+                <button class="btn-back" data-page="landing">← Back</button>
+                <h2 class="page-title">✦ Select a Spread ✦</h2>
+                <p class="page-desc">Sense the cosmic order through intuition and select the spread aligned with your query</p>
+            </div>
+            <div class="spread-options">
+                <div class="spread-card" data-spread="single">
+                    <div class="spread-glyph">
+                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="16" cy="16" r="12" stroke-dasharray="2 2" stroke-opacity="0.4"/>
+                            <circle cx="16" cy="16" r="7"/>
+                            <circle cx="16" cy="16" r="2" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Single Revelation</h3>
+                    <p>Draw one core card for swift, direct guidance, energetic snapshot, and mindful clarity</p>
+                    <div class="spread-meta">
+                        <span class="card-count">1 Card</span>
+                        <div class="difficulty-dots">
+                            <span class="diff-dot active"></span>
+                            <span class="diff-dot"></span>
+                            <span class="diff-dot"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spread-card" data-spread="three">
+                    <div class="spread-glyph">
+                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="8" cy="16" r="5"/>
+                            <circle cx="16" cy="16" r="5"/>
+                            <circle cx="24" cy="16" r="5"/>
+                            <line x1="13" y1="16" x2="19" y2="16" stroke-dasharray="1 1"/>
+                        </svg>
+                    </div>
+                    <h3>Time Stream</h3>
+                    <p>Connecting past karma, present circumstance, and unfolding future trajectory</p>
+                    <div class="spread-meta">
+                        <span class="card-count">3 Cards</span>
+                        <div class="difficulty-dots">
+                            <span class="diff-dot active"></span>
+                            <span class="diff-dot active"></span>
+                            <span class="diff-dot"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spread-card" data-spread="love">
+                    <div class="spread-glyph">
+                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M16 26 C8 18 4 12 8 7 A6 6 0 0 1 16 10 A6 6 0 0 1 24 7 C28 12 24 18 16 26 Z"/>
+                            <circle cx="16" cy="14" r="2" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Romantic Affinity</h3>
+                    <p>In-depth exploration of mutual desires, relationship obstacles, and union potential</p>
+                    <div class="spread-meta">
+                        <span class="card-count">5 Cards</span>
+                        <div class="difficulty-dots">
+                            <span class="diff-dot active"></span>
+                            <span class="diff-dot active"></span>
+                            <span class="diff-dot"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spread-card" data-spread="cross">
+                    <div class="spread-glyph">
+                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="16" cy="16" r="13" stroke-opacity="0.3"/>
+                            <line x1="16" y1="3" x2="16" y2="29"/>
+                            <line x1="3" y1="16" x2="29" y2="16"/>
+                            <rect x="12" y="12" width="8" height="8" rx="2"/>
+                        </svg>
+                    </div>
+                    <h3>Celtic Cross</h3>
+                    <p>The seminal ten-card holographic array unlocking comprehensive multidimensional insight</p>
+                    <div class="spread-meta">
+                        <span class="card-count">10 Cards</span>
+                        <div class="difficulty-dots">
+                            <span class="diff-dot active"></span>
+                            <span class="diff-dot active"></span>
+                            <span class="diff-dot active"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question Input Page -->
+        <section id="question-page" class="page">
+            <div class="page-header">
+                <button class="btn-back" data-page="spread">← Back</button>
+                <h2 class="page-title">✦ Meditate on Your Query ✦</h2>
+                <p class="page-desc">Calm your mind and let your conscious intent resonate with the celestial sphere</p>
+            </div>
+            <div class="question-form">
+                <div class="question-input-wrapper">
+                    <textarea id="question-text" class="question-textarea" placeholder="Enter your specific question (optional, e.g.: What direction should I pursue in my career? What is the underlying dynamic in our connection?)..." rows="3"></textarea>
+                </div>
+
+                <span class="category-section-label">Select Domain of Focus</span>
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="general">
+                        <span class="cat-icon">🌌</span> General Life
+                    </button>
+                    <button class="category-btn" data-category="love">
+                        <span class="cat-icon">❤️</span> Love & Romance
+                    </button>
+                    <button class="category-btn" data-category="career">
+                        <span class="cat-icon">💼</span> Career & Purpose
+                    </button>
+                    <button class="category-btn" data-category="health">
+                        <span class="cat-icon">🌿</span> Health & Mind
+                    </button>
+                    <button class="category-btn" data-category="wealth">
+                        <span class="cat-icon">💰</span> Wealth & Fortune
+                    </button>
+                </div>
+
+                <div class="ai-mode-bar">
+                    <label class="ai-checkbox-label" title="Enable to receive personalized multi-turn reading powered by LLMs">
+                        <input type="checkbox" id="ai-mode-toggle" checked>
+                        <span class="custom-toggle"></span>
+                        <span class="toggle-text">✨ Enable AI Tarot Master Deep Reading</span>
+                    </label>
+                    <div id="ai-config-status" class="ai-config-status">
+                        <span id="ai-status-badge" class="badge badge-warning">No API Key (Using Classic Offline Library)</span>
+                        <button type="button" class="btn-text-link" id="quick-settings-btn">⚙️ Configure Key</button>
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button id="begin-btn" class="btn btn-primary btn-glow" style="width: 100%; max-width: 320px;">
+                        <span class="btn-text">BEGIN INVOCATION · DRAW CARDS</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card Reading Page -->
+        <section id="reading-page" class="page">
+            <div class="page-header">
+                <h2 class="page-title">✦ Draw Your Destined Cards ✦</h2>
+                <p class="page-desc">Breathe gently and instinctively draw <span id="cards-needed" class="highlight">3</span> cards from the deck</p>
+            </div>
+            
+            <div id="selected-area" class="selected-area">
+                <h3 class="selected-title">Chosen Positions</h3>
+                <div id="selected-cards" class="selected-cards"></div>
+            </div>
+
+            <div id="card-deck" class="card-deck"></div>
+
+            <div style="text-align:center; margin-top: 30px;">
+                <button id="reveal-btn" class="btn btn-primary btn-glow" style="display:none; padding: 16px 48px;">
+                    <span class="btn-text">REVEAL CELESTIAL PATTERN</span>
+                    <span class="btn-icon">✨</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Result Page -->
+        <section id="result-page" class="page">
+            <div class="page-header">
+                <h2 class="page-title">✦ Divination Results ✦</h2>
+                <p id="result-question" class="page-desc"></p>
+            </div>
+            <div id="result-spread" class="result-spread"></div>
+
+            <!-- AI Tarot Master Reading Container -->
+            <div id="ai-reading-container" class="ai-reading-container"></div>
+
+            <!-- Classic Offline Reading -->
+            <div id="overall-reading" class="overall-reading"></div>
+
+            <!-- Interactive Follow-up Chat with Tarot Master -->
+            <div id="ai-chat-section" class="ai-chat-section" style="display:none;">
+                <div class="chat-header">
+                    <div class="chat-title-group">
+                        <span class="chat-avatar">🔮</span>
+                        <div>
+                            <h3>Follow-Up Consultation with AI Master</h3>
+                            <p class="chat-subtitle">Have questions about this spread? Inquire for concrete actions, timing, or deep archetypal nuance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="chat-messages" class="chat-messages">
+                    <div class="chat-msg chat-msg-bot">
+                        <div class="msg-content">Seeker, regarding this celestial layout and cosmic metaphor, if you have lingering doubts or wish to explore a specific scenario, feel free to ask me.</div>
+                    </div>
+                </div>
+                <div class="chat-input-row">
+                    <input type="text" id="chat-input" class="chat-input" placeholder="Ask your follow-up question here (e.g., What concrete steps should I take next? What is the main hidden obstacle?)..." autocomplete="off" />
+                    <button type="button" id="chat-send-btn" class="btn btn-primary chat-send-btn">
+                        <span>Send</span>
+                        <span>✨</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button id="share-btn" class="btn btn-secondary">
+                    <span>📋 Copy Reading</span>
+                </button>
+                <button id="new-reading-btn" class="btn btn-primary">
+                    <span>🔮 New Divination</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Card Meanings Page -->
+        <section id="meanings-page" class="page">
+            <div class="page-header">
+                <h2 class="page-title">✦ Tarot Archive ✦</h2>
+                <p class="page-desc">Complete 78-Card Archetypal Compendium across Upright and Reversed Energies</p>
+            </div>
+
+            <div class="meanings-search-bar">
+                <span class="search-icon-decor">🔍</span>
+                <input type="text" id="meanings-search-input" class="meanings-search-input" placeholder="Search by card name, number, or keyword (e.g., Fool, Love, Breakthrough)..." />
+            </div>
+
+            <div class="meanings-filter">
+                <button class="filter-btn active" data-filter="major">Major Arcana</button>
+                <button class="filter-btn" data-filter="wands">Wands (Fire)</button>
+                <button class="filter-btn" data-filter="cups">Cups (Water)</button>
+                <button class="filter-btn" data-filter="swords">Swords (Air)</button>
+                <button class="filter-btn" data-filter="pentacles">Pentacles (Earth)</button>
+            </div>
+            <div id="meanings-grid" class="meanings-grid"></div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about-page" class="page">
+            <div class="page-header">
+                <h2 class="page-title">✦ About Tarot Agent ✦</h2>
+                <p class="page-desc">A celestial sanctuary bridging ancient archetypal symbolism with contemporary generative AI</p>
+            </div>
+            <div class="about-content">
+                <div class="about-card">
+                    <h3>🔮 The Sacred Tarot System</h3>
+                    <p>Originating in 15th-century Europe, Tarot has evolved into a profound mirror of human consciousness. The complete 78-card deck features 22 Major Arcana symbolizing the archetypal journey of individuation, and 56 Minor Arcana navigating the elemental forces of everyday reality (Fire, Water, Air, Earth).</p>
+                </div>
+                <div class="about-card">
+                    <h3>🌌 Realtime 3D Cosmic Physics</h3>
+                    <p>Constructed from authentic deep-space imagery captured by the European Southern Observatory (ESO) and Hubble. Procedural mathematical modeling of the Helix Nebula orbits dynamically with your cursor, creating a contemplative, serene psychological atmosphere.</p>
+                </div>
+                <div class="about-card">
+                    <h3>🤖 Jungian Archetypes & AI Mentorship</h3>
+                    <p>Synthesizing Carl Jung's principle of Synchronicity with state-of-the-art Large Language Models. Rather than reciting rigid textbook snippets, the AI Agent reads the harmonious dialogue between cards to provide empathetic, penetrating, and actionable insight.</p>
+                </div>
+                <div class="about-card">
+                    <h3>💻 Open Source & Client-Side Privacy</h3>
+                    <p>Tarot Agent is 100% open source and executes entirely within your browser. All API keys are stored locally in your browser's LocalStorage and never touch third-party servers, safeguarding your personal privacy.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Traditional Card Detail Modal -->
+    <div id="card-detail-modal" class="card-detail-modal" style="display:none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close detail">✕</button>
+            <div id="modal-body" class="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- AI Settings Modal -->
+    <div id="settings-modal" class="modal" style="display:none;">
+        <div class="modal-overlay" id="settings-overlay"></div>
+        <div class="modal-content settings-modal-content">
+            <button class="modal-close" id="settings-close-btn" aria-label="Close settings">✕</button>
+            <div class="modal-header">
+                <div class="settings-title-row">
+                    <span class="settings-icon">⚙️</span>
+                    <div>
+                        <h3>AI Spiritual Mentor API Configuration</h3>
+                        <p class="settings-subtitle">Configure your LLM API Key to unlock deep stream readings and endless multi-turn dialogues</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body settings-body">
+                <div class="form-group">
+                    <label for="api-provider-select">🌟 Quick Provider Preset:</label>
+                    <select id="api-provider-select" class="form-select">
+                        <option value="deepseek">DeepSeek Official (Recommended, High Quality)</option>
+                        <option value="siliconflow">SiliconFlow (Direct Access / Global CDN)</option>
+                        <option value="openai">OpenAI (GPT-4o / GPT-4o-mini)</option>
+                        <option value="moonshot">Moonshot AI (Kimi)</option>
+                        <option value="zhipu">Zhipu AI (GLM-4-Flash)</option>
+                        <option value="custom">Custom / OpenAI Compatible Proxy</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="api-base-url">🔗 Endpoint URL (Base URL):</label>
+                    <input type="text" id="api-base-url" class="form-input" placeholder="https://api.deepseek.com/v1" />
+                    <small class="form-hint">Must be OpenAI Chat Completions compatible</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="api-key">🔑 API Key:</label>
+                    <div class="input-password-wrapper">
+                        <input type="password" id="api-key" class="form-input" placeholder="sk-..." />
+                        <button type="button" id="toggle-key-visibility" class="btn-icon-toggle" title="Toggle key visibility">👁️</button>
+                    </div>
+                    <small class="form-hint">🔒 Key is stored strictly inside your browser's LocalStorage. Direct requests from your client, completely safe.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="api-model">🤖 Model ID:</label>
+                    <input type="text" id="api-model" class="form-input" placeholder="deepseek-chat" />
+                    <small class="form-hint">e.g., deepseek-chat, deepseek-ai/DeepSeek-V3, gpt-4o-mini, etc.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="api-system-prompt">🔮 Tarot Reader Persona & System Prompt:</label>
+                    <textarea id="api-system-prompt" class="form-textarea" rows="3">You are an ancient, empathetic Tarot Master and Spiritual Mentor versed in occult symbolism and Jungian psychology. When interpreting readings, synthesize the querent's question, card positions, upright/reversed meanings, and dynamic card interplays to deliver deep, poetic, warm, and highly actionable guidance.</textarea>
+                </div>
+
+                <div id="settings-status-box" class="settings-status-box" style="display:none;"></div>
+
+                <div class="settings-btn-row">
+                    <button type="button" id="test-api-btn" class="btn btn-secondary">
+                        <span>⚡ Test Connection</span>
+                    </button>
+                    <button type="button" id="save-settings-btn" class="btn btn-primary">
+                        <span>💾 Save Settings</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p class="footer-brand">✦ TAROT AGENT · COSMIC SANCTUARY ✦</p>
+            <p class="footer-disclaimer">Tarot readings are intended for psychological self-reflection and contemplative contemplation only.</p>
+            <p class="footer-links">
+                <a href="https://github.com/yaohaoliang141-max/Tarot-Agent-.git" target="_blank" rel="noopener">GitHub</a>
+                <span>·</span>
+                <span>Contemporary Studio Aesthetic © 2026</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/three.min.js"></script>
+    <script src="js/tarot-data.js?v=20261017_tarot_agent_v1"></script>
+    <script src="js/celestial-astrolabe.js?v=20261017_tarot_agent_v1"></script>
+    <script src="js/app.js?v=20261017_tarot_agent_v1"></script>
+</body>
+</html>
